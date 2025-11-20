@@ -33,7 +33,7 @@ const parse_number = (key: IconKey, value: number) => {
 };
 export function SummaryCard({ body, icon, desc }: Props) {
   return (
-    <div className="flex flex-col bg-neutral-200 items-center p-2 rounded-xl size-20 justify-center">
+    <div className="flex flex-col basis-1/4 aspect-square bg-neutral-200 items-center rounded-xl  justify-center sm:max-w-22">
       <span>{ICONS_SUMMARY[icon]}</span>
       <span className="text-center font-semibold">
         {parse_number(icon, body)}

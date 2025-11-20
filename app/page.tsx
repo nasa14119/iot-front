@@ -16,7 +16,7 @@ export default async function Home() {
   const data = await get_data();
   return (
     <main>
-      <header className="p-2 text-center">
+      <header className="p-2 text-center my-5">
         <h1 className="text-4xl font-bold">Resumen</h1>
       </header>
       <Suspense>
