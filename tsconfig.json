@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@types": ["./types.ts"]
+      "@types": ["./types.ts"],
+      "@utils": ["./utils.ts"]
     }
   },
   "include": [
