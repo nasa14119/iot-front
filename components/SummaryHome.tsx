@@ -6,17 +6,11 @@ import useSwr from "swr";
 import { createContext, useContext } from "react";
 import type { PropsWithChildren } from "react";
 import { getEspLastRegistreClient } from "@utils";
+import { EMPTY_REGISTRE } from "../const";
+import { ErrorSummary } from "./ErrorSummary";
 type Props = { registre: Registre };
-const default_registre: Registre = {
-  date: "",
-  humidity: 0,
-  level: 0,
-  pH: 0,
-  soil: 0,
-  temperature: 0,
-};
 const SECONDS_INTERVAL = 1 * 1000;
-const Context = createContext<Registre>(default_registre);
+const Context = createContext<Registre>(EMPTY_REGISTRE);
 export function RegistreContext({
   registre,
   children,
@@ -28,12 +22,17 @@ export function RegistreContext({
       refreshInterval: SECONDS_INTERVAL,
       fallbackData: registre,
       compare: (prev, next) => {
+        if (!prev || !next) return true;
+        if ("status" in prev && !("status" in next)) return true;
+        if ("status" in next) return false;
+        if ("status" in prev) return true;
         const prevDate = prev?.date ?? "";
         const nextDate = next?.date ?? "";
         return prevDate === nextDate;
       },
     }
   );
+  if ("status" in clientData) return <ErrorSummary {...clientData} />;
   return <Context.Provider value={clientData}>{children}</Context.Provider>;
 }
 export function SumamryHome() {

@@ -6,3 +6,7 @@ export interface Registre {
   soil: number;
   pH: number;
 }
+export interface FetchError {
+  status: number;
+  error?: string;
+}
