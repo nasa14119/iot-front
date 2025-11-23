@@ -22,13 +22,12 @@ export function RegistreContext({
       refreshInterval: SECONDS_INTERVAL,
       fallbackData: registre,
       compare: (prev, next) => {
-        if (!prev || !next) return true;
-        if ("status" in prev && !("status" in next)) return true;
-        if ("status" in next) return false;
-        if ("status" in prev) return true;
-        const prevDate = prev?.date ?? "";
-        const nextDate = next?.date ?? "";
-        return prevDate === nextDate;
+        if (prev && next && "status" in next && "status" in prev) {
+          return true;
+        }
+        if (!prev || "status" in prev) return false;
+        if (!next || "status" in next) return true;
+        return prev.date === next.date;
       },
     }
   );
@@ -41,7 +40,7 @@ export function SumamryHome() {
     <>
       <DayDisplay day={registre.date} />
       <div className="flex p-2 justify-evenly flex-wrap gap-2">
-        <SummaryCard icon="humidity" body={registre.soil} desc="ambiente" />
+        <SummaryCard icon="humidity" body={registre.humidity} desc="ambiente" />
         <SummaryCard
           icon="temperature"
           body={registre.temperature}

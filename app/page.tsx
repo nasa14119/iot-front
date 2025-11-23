@@ -1,9 +1,10 @@
 import { RegistreContext, SumamryHome } from "../components/SummaryHome";
 import { FancyLink } from "../components/FancyLink";
-import { getEspLastRegistre } from "../utils";
+import { getEspLastRegistre } from "@fetch";
 import { ErrorSummary } from "../components/ErrorSummary";
 async function DataItem() {
   const data = await getEspLastRegistre();
+
   if (!data || "status" in data) return <ErrorSummary {...data} />;
   return (
     <RegistreContext registre={data}>

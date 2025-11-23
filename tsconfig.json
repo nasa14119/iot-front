@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@types": ["./types.ts"],
-      "@utils": ["./utils.ts"]
+      "@utils": ["./utils.ts"],
+      "@fetch": ["./data_fetch.ts"]
     }
   },
   "include": [
