@@ -22,6 +22,7 @@ export function RegistreContext({
       refreshInterval: SECONDS_INTERVAL,
       fallbackData: registre,
       compare: (prev, next) => {
+        if (!prev && !next) return false;
         if (prev && next && "status" in next && "status" in prev) {
           return true;
         }
