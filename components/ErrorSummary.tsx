@@ -23,7 +23,6 @@ export function ErrorSummary(error: FetchError) {
     do {
       await new Promise((res) => setTimeout(res, COOLDOWN));
       data = await getEspLastRegistreClient();
-      console.log(data);
     } while ("status" in data);
     refresh();
   });
