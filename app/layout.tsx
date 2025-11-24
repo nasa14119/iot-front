@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Nav } from "../components/Nav";
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
         className={`${interFont.variable} antialiased max-w-[500px] mx-auto`}
       >
         {children}
+        <Nav />
       </body>
     </html>
   );
