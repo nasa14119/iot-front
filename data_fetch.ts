@@ -26,11 +26,8 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     return ["ThingSpeack Error", null];
   }
   try {
-    const helth = await fetch(`${url}/helth`, { redirect: "follow" }).catch(
-      (e) => {
-        throw e;
-      }
-    );
+    const helth = await fetch(`${url}/helth`, { redirect: "follow" });
+    console.log(await helth.json());
     const isOk = helth.ok;
     if (!isOk || !url) throw null;
     return [null, url];
