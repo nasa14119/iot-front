@@ -27,12 +27,10 @@ export const check_link = async (url?: string): Promise<CheckError> => {
   }
   try {
     const helth = await fetch(`${url}/helth`, { redirect: "follow" });
-    console.log(helth);
     const isOk = helth.ok;
     if (!isOk || !url) throw null;
     return [null, url];
-  } catch (e) {
-    console.log(e);
+  } catch {
     return ["Server offline", null];
   }
 };
@@ -51,7 +49,6 @@ export const getEspLastRegistre = async (): RequestResponse => {
     if (!esp.ok) return error(esp.status);
     return await esp.json();
   } catch (e) {
-    console.log(e);
     const err = e as Record<string, string>;
     if (err?.code === "FETCH") return error(503);
     if (err.code === "SERVER_DOWN") {
