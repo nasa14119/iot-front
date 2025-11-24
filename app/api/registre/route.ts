@@ -17,7 +17,6 @@ export async function GET() {
       throw { code: "SERVER_DOWN", error: err };
     }
     url = new_link;
-    console.log(new_link);
     const data = await getEspLastRegistre();
     const res = NextResponse.json(data);
     res.cookies.set("url", url, {
@@ -34,3 +33,4 @@ export async function GET() {
     return NextResponse.json({ ...route_error, status }, { status });
   }
 }
+export const revalidate = 0;

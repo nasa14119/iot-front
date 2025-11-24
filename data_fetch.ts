@@ -8,14 +8,14 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     }
     return [null, process.env.GATEWAY_PATH];
   }
-  // if (url) {
-  //   try {
-  //     const isOk = (await fetch(`${url}/helth`)).ok;
-  //     if (isOk) return [null, url];
-  //   } catch {
-  //     url = "";
-  //   }
-  // }
+  if (url) {
+    try {
+      const isOk = (await fetch(`${url}/helth`)).ok;
+      if (isOk) return [null, url];
+    } catch {
+      url = "";
+    }
+  }
   try {
     const res = await fetch(`${process.env.THINGSKEAK_URL}`);
     if (!res.ok) throw null;
@@ -26,7 +26,6 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     return ["ThingSpeack Error", null];
   }
   try {
-    console.log(url);
     const helth = await fetch(`${url}/helth`, { redirect: "follow" });
     const isOk = helth.ok;
     if (!isOk || !url) throw null;

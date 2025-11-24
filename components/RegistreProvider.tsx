@@ -7,7 +7,7 @@ import { getEspLastRegistreClient } from "@utils";
 import { EMPTY_REGISTRE } from "../const";
 import { ErrorSummary } from "./ErrorSummary";
 type Props = { registre: Registre };
-const SECONDS_INTERVAL = 20 * 1000;
+const SECONDS_INTERVAL = 10 * 1000;
 const Context = createContext<Registre>(EMPTY_REGISTRE);
 export function RegistreContext({
   registre,
