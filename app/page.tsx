@@ -21,7 +21,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">Resumen</h1>
       </header>
       <DataItem />
-      <FancyLink href="/registres" className="text-xl font-semibold my-2">
+      <FancyLink href="/registros" className="text-xl font-semibold my-2">
         Registros
       </FancyLink>
       <Carrusel />

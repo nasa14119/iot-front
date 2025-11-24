@@ -9,7 +9,7 @@ export function DayDisplay({ day }: Props) {
   const hour = format(day, "h:mm a", "en");
   return (
     <div className="my-2 flex items-center px-2">
-      <div>
+      <div className="w-full">
         <div className="text-xs">Ultimo registro:</div>
         <div className="flex gap-2 capitalize font-semibold items-center">
           <span className="text-lg">{name}</span>
