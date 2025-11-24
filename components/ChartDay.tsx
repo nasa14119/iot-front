@@ -38,8 +38,8 @@ export function ChartDay({ registres, topic, title, color, ...rest }: Props) {
     <Card className="my-2 shadow-none border border-black/10 gap-0" {...rest}>
       <CardHeader className="pb-1">
         <CardTitle>{title}</CardTitle>
-        <CardDescription>
-          Desde: {format(registres[0].date, "long", "es")}
+        <CardDescription className="first-letter:uppercase">
+          {format(registres[0].date, "full", "es")}
         </CardDescription>
       </CardHeader>
       <CardContent>
