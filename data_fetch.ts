@@ -30,7 +30,8 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     const isOk = helth.ok;
     if (!isOk || !url) throw null;
     return [null, url];
-  } catch {
+  } catch (e) {
+    console.log(e);
     return ["Server offline", null];
   }
 };
@@ -49,10 +50,10 @@ export const getEspLastRegistre = async (): RequestResponse => {
     if (!esp.ok) return error(esp.status);
     return await esp.json();
   } catch (e) {
+    console.log(e);
     const err = e as Record<string, string>;
     if (err?.code === "FETCH") return error(503);
     if (err.code === "SERVER_DOWN") {
-      console.log(error);
       const res = error(521);
       res.error = err.error;
       return res;
