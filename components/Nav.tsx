@@ -8,7 +8,7 @@ export function Nav({}) {
         <NavIcon link="/" icon={<RiHomeFill className="size-8" />} />
         <NavIcon
           link="/registros"
-          icon={<RiBookOpenFill className="size-8" />}
+          icon={<RiBookOpenFill className="size-8 pointer-events-none" />}
         />
       </div>
     </nav>
