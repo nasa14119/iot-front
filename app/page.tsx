@@ -3,6 +3,7 @@ import { RegistreContext } from "../components/RegistreProvider";
 import { FancyLink } from "../components/FancyLink";
 import { getEspLastRegistre } from "@fetch";
 import { ErrorSummary } from "../components/ErrorSummary";
+import { Carrusel } from "../components/Carrusel";
 async function DataItem() {
   const data = await getEspLastRegistre();
 
@@ -23,6 +24,7 @@ export default function Home() {
       <FancyLink href="/registres" className="text-xl font-semibold my-2">
         Registros
       </FancyLink>
+      <Carrusel />
     </main>
   );
 }

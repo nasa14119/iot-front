@@ -10,3 +10,9 @@ export interface FetchError {
   status: number;
   error?: string;
 }
+export interface CarrusselElement {
+  href: string;
+  title: string;
+  desc: string;
+  img: string;
+}
