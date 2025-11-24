@@ -15,7 +15,7 @@ const Text = ({ status, ...rest }: CardProps) => {
   if (status === 521) return <span {...rest}>{rest.error}</span>;
   return <span {...rest}>Something unexpected happend</span>;
 };
-const COOLDOWN = 2 * 1000;
+const COOLDOWN = 10 * 1000;
 export function ErrorSummary(error: FetchError) {
   const { refresh } = useRouter();
   const refetch = useEffectEvent(async () => {
@@ -23,7 +23,6 @@ export function ErrorSummary(error: FetchError) {
     do {
       await new Promise((res) => setTimeout(res, COOLDOWN));
       data = await getEspLastRegistreClient();
-      console.log(data);
     } while ("status" in data);
     refresh();
   });
