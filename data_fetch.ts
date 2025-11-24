@@ -1,4 +1,5 @@
 "use server";
+import { Registres } from "@types";
 import { error, RequestResponse } from "@utils";
 type CheckError = [err: null, data: string] | [err: string, data: null];
 export const check_link = async (url?: string): Promise<CheckError> => {
@@ -59,4 +60,18 @@ export const getEspLastRegistre = async (): RequestResponse => {
     }
     return error(500);
   }
+};
+
+export const getEspRegistresDay = async (): Promise<
+  [number, Registres | null]
+> => {
+  const [err, url] = await check_link();
+  if (err !== null) {
+    return [521, null];
+  }
+  const res = await fetch(`${url}/registres/day`);
+  if (!res.ok) return [res.status, null];
+  if (res.status === 204) return [204, null];
+  const registres = await res.json();
+  return [200, registres];
 };
