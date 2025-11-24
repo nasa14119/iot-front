@@ -8,33 +8,47 @@ import { EMPTY_REGISTRE } from "../const";
 import { ErrorSummary } from "./ErrorSummary";
 type Props = { registre: Registre };
 const SECONDS_INTERVAL = 10 * 1000;
-const Context = createContext<Registre>(EMPTY_REGISTRE);
+const Context = createContext<{ registre: Registre; isLoading: boolean }>({
+  registre: EMPTY_REGISTRE,
+  isLoading: true,
+});
 export function RegistreContext({
   registre,
   children,
 }: Props & PropsWithChildren) {
-  const { data: clientData } = useSwr(
-    "api/registre",
-    getEspLastRegistreClient,
-    {
-      refreshInterval: SECONDS_INTERVAL,
-      fallbackData: registre,
-      compare: (prev, next) => {
-        if (!prev && !next) return false;
-        if (prev && next && "status" in next && "status" in prev) {
-          return true;
-        }
-        if (!prev || "status" in prev) return false;
-        if (!next || "status" in next) return true;
-        return prev.date === next.date;
-      },
-    }
-  );
+  const {
+    data: clientData,
+    isLoading,
+    isValidating,
+  } = useSwr("api/registre", getEspLastRegistreClient, {
+    refreshInterval: SECONDS_INTERVAL,
+    fallbackData: registre,
+    compare: (prev, next) => {
+      if (!prev && !next) return false;
+      if (prev && next && "status" in next && "status" in prev) {
+        return true;
+      }
+      if (!prev || "status" in prev) return false;
+      if (!next || "status" in next) return true;
+      return prev.date === next.date;
+    },
+  });
   if ("status" in clientData) return <ErrorSummary {...clientData} />;
-  return <Context.Provider value={clientData}>{children}</Context.Provider>;
+  return (
+    <Context.Provider
+      value={{ registre: clientData, isLoading: isLoading || isValidating }}
+    >
+      {children}
+    </Context.Provider>
+  );
 }
 export const useRegistre = () => {
   const constext = useContext(Context);
   if (!constext) throw new Error("Context unaccesible");
-  return constext;
+  return constext.registre;
+};
+export const useRegistreLoading = () => {
+  const constext = useContext(Context);
+  if (!constext) throw new Error("Context unaccesible");
+  return constext.isLoading;
 };
