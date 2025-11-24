@@ -27,7 +27,7 @@ export const check_link = async (url?: string): Promise<CheckError> => {
   }
   try {
     const helth = await fetch(`${url}/helth`, { redirect: "follow" });
-    console.log(await helth.json());
+    console.log(helth);
     const isOk = helth.ok;
     if (!isOk || !url) throw null;
     return [null, url];
