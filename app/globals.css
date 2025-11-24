@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --duration-fade: 250ms;
 }
 
 @theme inline {
@@ -14,4 +15,17 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-main), Arial, Helvetica, sans-serif;
+}
+@keyframes fade-in-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  opacity: 0;
+  animation: fade-in-animation 300ms forwards ease;
+  animation-delay: var(--duration-fade);
 }

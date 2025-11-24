@@ -11,12 +11,14 @@ const CARDS: CarrusselElement[] = [
     desc: "Ver los registros humedad",
     href: "/registros/humedad",
     img: "/imgs/humedad-carrusel.jpg",
+    loader: "/imgs/humedad-carrusel-loader.webp",
     title: "humedad",
   },
   {
     desc: "Ver los registros de riego",
     href: "/registros/riego",
     img: "/imgs/riego-carrusel.jpeg",
+    loader: "/imgs/riego-carrusel-loader.webp",
     title: "riego",
   },
   {
@@ -30,8 +32,13 @@ export function Carrusel({}) {
   return (
     <section className="h-[32vh] overflow-x-scroll max-w-dvw py-2 [scrollbar-width:none] ">
       <div className="h-full w-fit px-2 flex overflow-scroll gap-x-2">
-        {CARDS.map((info) => (
-          <CarruselCard {...info} key={info.title} className="snap-center" />
+        {CARDS.map((info, i) => (
+          <CarruselCard
+            {...info}
+            key={info.title}
+            className={`fade-in`}
+            style={{ "--duration-fade": `${i * 250}ms` }}
+          />
         ))}
       </div>
     </section>

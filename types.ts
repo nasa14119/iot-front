@@ -6,6 +6,7 @@ export interface Registre {
   soil: number;
   pH: number;
 }
+export type Registres = Omit<Registre, "level">[];
 export interface FetchError {
   status: number;
   error?: string;
@@ -15,4 +16,5 @@ export interface CarrusselElement {
   title: string;
   desc: string;
   img: string;
+  loader?: string;
 }
