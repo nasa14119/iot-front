@@ -33,3 +33,4 @@ export async function GET() {
     return NextResponse.json({ ...route_error, status }, { status });
   }
 }
+export const revalidate = 0;

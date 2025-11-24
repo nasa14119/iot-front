@@ -16,4 +16,5 @@ export interface CarrusselElement {
   title: string;
   desc: string;
   img: string;
+  loader?: string;
 }

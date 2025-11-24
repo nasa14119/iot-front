@@ -2,6 +2,11 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --duration-fade: 250ms;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -121,4 +126,17 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+@keyframes fade-in-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  opacity: 0;
+  animation: fade-in-animation 300ms forwards ease;
+  animation-delay: var(--duration-fade);
 }

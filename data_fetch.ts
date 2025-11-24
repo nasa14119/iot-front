@@ -53,7 +53,6 @@ export const getEspLastRegistre = async (): RequestResponse => {
     const err = e as Record<string, string>;
     if (err?.code === "FETCH") return error(503);
     if (err.code === "SERVER_DOWN") {
-      console.log(error);
       const res = error(521);
       res.error = err.error;
       return res;
