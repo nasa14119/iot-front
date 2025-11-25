@@ -3,12 +3,15 @@ import { useRouter } from "next/navigation";
 import { useRegistres } from "../../../components/RegistresProvider";
 import { RegistrosHeader } from "../../../components/RegistrosHeader";
 import { ChartDay } from "@components/ChartDay";
+import { HeaderRegistrosPage } from "@components/HeaderRegistrosPage";
 export default function RegistresMain() {
   const registres = useRegistres();
   const router = useRouter();
+  if (!registres) return null;
   return (
     <main className="min-h-dvh bg-white/90 h-fit">
       <RegistrosHeader title="registros" />
+      <HeaderRegistrosPage />
       <section className="flex gap-x-2 flex-wrap flex-col px-2 pb-20">
         <ChartDay
           registres={registres}
@@ -20,13 +23,13 @@ export default function RegistresMain() {
         <ChartDay
           registres={registres}
           topic="temperature"
-          title="Temperatura del ambiente"
+          title="Temperatura del Ambiente"
           color="var(--color-red-600)"
         />
         <ChartDay
           registres={registres}
           topic="soil"
-          title="Humedad de las plantas"
+          title="Humedad de las Plantas"
           color="var(--color-green-600)"
         />
       </section>

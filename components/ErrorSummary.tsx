@@ -15,8 +15,12 @@ const Text = ({ status, ...rest }: CardProps) => {
   if (status === 521) return <span {...rest}>{rest.error}</span>;
   return <span {...rest}>Something unexpected happend</span>;
 };
-const COOLDOWN = 10 * 1000;
-export function ErrorSummary(error: FetchError) {
+const ENV_REFRESH = process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE
+  ? Number(process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE)
+  : 10;
+const COOLDOWN = ENV_REFRESH * 1000;
+type Props = FetchError & { isLoading: boolean };
+export function ErrorSummary({ isLoading, ...error }: Props) {
   const { refresh } = useRouter();
   const refetch = useEffectEvent(async () => {
     let data = await getEspLastRegistreClient();
@@ -32,7 +36,12 @@ export function ErrorSummary(error: FetchError) {
   return (
     <div className="w-full aspect-16/7 flex justify-center items-center">
       <div className="rounded-4xl size-[90%] flex justify-center items-center bg-neutral-300/20 flex-col">
-        <Icon status={error.status} className="size-16 text-black/90" />
+        <Icon
+          status={error.status}
+          className={`size-16  ${
+            isLoading ? "text-black/20" : "text-black/90"
+          }`}
+        />
         <Text {...error} />
         <span className="text-xs">status:{error.status}</span>
       </div>

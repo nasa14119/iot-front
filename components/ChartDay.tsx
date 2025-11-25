@@ -16,7 +16,8 @@ import {
   ChartTooltipContent,
 } from "@shad/components/ui/chart";
 import { format } from "@formkit/tempo";
-import { HTMLAttributes } from "react";
+import { CSSProperties, HTMLAttributes } from "react";
+import { RiArrowRightSLine } from "@remixicon/react";
 
 export const description = "A line chart";
 
@@ -36,11 +37,15 @@ export function ChartDay({ registres, topic, title, color, ...rest }: Props) {
   const chartColor = color ?? "var(--color-neutral-400)";
   return (
     <Card className="my-2 shadow-none border border-black/10 gap-0" {...rest}>
-      <CardHeader className="pb-1">
+      <CardHeader className="pb-1 relative">
         <CardTitle>{title}</CardTitle>
         <CardDescription className="first-letter:uppercase">
           {format(registres[0].date, "full", "es")}
         </CardDescription>
+        <RiArrowRightSLine
+          className={`absolute right-5 size-8 text-(--arrow-color) pointer-events-none`}
+          style={{ "--arrow-color": chartColor } as CSSProperties}
+        />
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -48,7 +53,8 @@ export function ChartDay({ registres, topic, title, color, ...rest }: Props) {
             accessibilityLayer
             data={registres}
             margin={{
-              left: 14,
+              top: 10,
+              left: 17,
               right: 11,
             }}
           >

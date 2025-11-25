@@ -2,8 +2,8 @@ import { RiCloudOffFill, RiDatabase2Fill } from "@remixicon/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Props = { status: number };
-export function ErrorRegisters({ status }: Props) {
+type Props = { status: number; error?: string };
+export function ErrorRegisters({ status, error }: Props) {
   const pathname = usePathname();
   const title = pathname.split("/").at(-1);
   return (
@@ -18,7 +18,8 @@ export function ErrorRegisters({ status }: Props) {
           <RiCloudOffFill className="size-30 text-black/90" />
         )}
         <span className="font-semibold text-2xl">
-          {status === 204 ? "Database empty" : "Server down"}
+          {status === 204 && !error ? "Database empty" : "Server down"}
+          {error}
         </span>
         <Link
           href="/"
