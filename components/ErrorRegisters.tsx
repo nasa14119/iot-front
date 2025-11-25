@@ -1,11 +1,17 @@
 import { RiCloudOffFill, RiDatabase2Fill } from "@remixicon/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Props = { status: number };
 export function ErrorRegisters({ status }: Props) {
+  const pathname = usePathname();
+  const title = pathname.split("/").at(-1);
   return (
-    <div className="w-dvw h-dvh flex justify-center items-start mx-auto max-w-[500px] pt-2">
-      <div className="rounded-4xl w-[90%] h-[90%] flex justify-center items-center bg-neutral-300/20 flex-col">
+    <main className="w-dvw h-dvh flex justify-center items-center mx-auto max-w-[500px] flex-col pb-[10dvh] pt-1 px-[10vw]">
+      <h1 className="font-bold text-3xl capitalize text-center py-5">
+        {title}
+      </h1>
+      <div className="rounded-4xl size-full flex justify-center items-center bg-neutral-300/20 flex-col">
         {status === 204 ? (
           <RiDatabase2Fill className="size-30 text-black/90" />
         ) : (
@@ -21,6 +27,6 @@ export function ErrorRegisters({ status }: Props) {
           Go Home
         </Link>
       </div>
-    </div>
+    </main>
   );
 }
