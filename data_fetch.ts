@@ -13,7 +13,8 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     try {
       const isOk = (await fetch(`${url}/helth`)).ok;
       if (isOk) return [null, url];
-    } catch {
+    } catch (e) {
+      console.log(e);
       url = "";
     }
   }
@@ -68,8 +69,16 @@ export const getEspRegistresDay = async (): Promise<
   if (err !== null) {
     return [521, null];
   }
-  const res = await fetch(`${url}/registres/day`);
-  if (!res.ok) return [res.status, null];
+  let res;
+  try {
+    res = await fetch(`${url}/registres/day`).catch(() => {
+      throw "FETCH";
+    });
+    if (!res.ok) return [res.status, null];
+  } catch (e) {
+    if (e === "FETCH") return [521, null];
+    return [500, null];
+  }
   if (res.status === 204) return [204, null];
   const registres = await res.json();
   return [200, registres];

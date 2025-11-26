@@ -6,10 +6,10 @@ type Props = PropsWithChildren;
 
 export default async function layout({ children }: Props) {
   const [status, data] = await getEspRegistresDay();
-
   return (
     <RegistersProvider registres={data} status={status}>
       {children}
     </RegistersProvider>
   );
 }
+export const revalidate = 3;
