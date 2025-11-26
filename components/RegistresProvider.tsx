@@ -2,14 +2,17 @@
 import type { Registres } from "@types";
 import { createContext, PropsWithChildren, useContext } from "react";
 import { ErrorRegisters } from "./ErrorRegisters";
+import { useDayRegistres } from "../hooks/useDayRegistres";
 const Context = createContext<Registres | null>(null);
 type Props = PropsWithChildren & {
   status: number;
   registres: Registres | null;
 };
 export function RegistersProvider({ registres, children, status }: Props) {
+  const [data, , error] = useDayRegistres(registres ?? undefined);
   if (!registres) return <ErrorRegisters status={status} />;
-  return <Context.Provider value={registres}>{children}</Context.Provider>;
+  if (error) return <ErrorRegisters {...error} />;
+  return <Context.Provider value={data}>{children}</Context.Provider>;
 }
 export const useRegistres = () => {
   const registres = useContext(Context);
