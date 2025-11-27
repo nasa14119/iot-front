@@ -19,6 +19,7 @@ export const useDayRegistres = (
     getEspLastRegistresClient,
     {
       refreshInterval: REFRESH_INTERVAL,
+      fallback: inicialValue,
       fallbackData: inicialValue,
       ...props,
     }
