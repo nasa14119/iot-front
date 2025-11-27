@@ -1,6 +1,7 @@
 "use server";
 import { Registres } from "@types";
 import { error, RequestResponse } from "@utils";
+const AbortTime = 10 * 1000;
 type CheckError = [err: null, data: string] | [err: string, data: null];
 export const check_link = async (url?: string): Promise<CheckError> => {
   if (process.env.NODE_ENV === "development") {
@@ -71,7 +72,9 @@ export const getEspRegistresDay = async (): Promise<
   }
   let res;
   try {
-    res = await fetch(`${url}/registres/day`).catch(() => {
+    res = await fetch(`${url}/registres/day`, {
+      signal: AbortSignal.timeout(AbortTime),
+    }).catch(() => {
       throw "FETCH";
     });
     if (!res.ok) return [res.status, null];
