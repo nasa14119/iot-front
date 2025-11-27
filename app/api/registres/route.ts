@@ -16,6 +16,7 @@ export async function GET() {
   }
   cookieJar.set("url", new_link);
   const [status, data] = await getEspRegistresDay();
+  if (status === 204) return new NextResponse(null, { status: 204 });
   return NextResponse.json({ status, data }, { status });
 }
 export const revalidate = 0;

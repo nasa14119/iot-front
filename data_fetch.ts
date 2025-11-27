@@ -13,7 +13,8 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     try {
       const isOk = (await fetch(`${url}/helth`)).ok;
       if (isOk) return [null, url];
-    } catch {
+    } catch (e) {
+      console.log(e);
       url = "";
     }
   }

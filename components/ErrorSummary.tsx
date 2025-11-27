@@ -19,8 +19,8 @@ const ENV_REFRESH = process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE
   ? Number(process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE)
   : 10;
 const COOLDOWN = ENV_REFRESH * 1000;
-type Props = FetchError & { isLoading: boolean };
-export function ErrorSummary({ isLoading, ...error }: Props) {
+type Props = FetchError & { isLoading?: boolean };
+export function ErrorSummary({ isLoading = false, ...error }: Props) {
   const { refresh } = useRouter();
   const refetch = useEffectEvent(async () => {
     let data = await getEspLastRegistreClient();

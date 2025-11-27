@@ -13,7 +13,6 @@ export const getEspLastRegistreClient = async (): RequestResponseClient => {
     const esp = await res.json();
     return esp;
   } catch {
-    console.log("call");
     throw error(500);
   }
 };
