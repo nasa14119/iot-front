@@ -7,7 +7,7 @@ export function ErrorRegisters({ status, error }: Props) {
   const pathname = usePathname();
   const title = pathname.split("/").at(-1);
   return (
-    <main className="w-dvw h-dvh flex justify-center items-center mx-auto max-w-[500px] flex-col pb-[10dvh] pt-1 px-[10vw]">
+    <main className="w-dvw h-dvh flex justify-center items-center mx-auto max-w-[500px] flex-col pb-[10dvh] pt-1 px-[10vw] md:px-2">
       <h1 className="font-bold text-3xl capitalize text-center py-5">
         {title}
       </h1>

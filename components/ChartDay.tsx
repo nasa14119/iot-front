@@ -54,7 +54,7 @@ export function ChartDay({ registres, topic, title, color, ...rest }: Props) {
             data={registres}
             margin={{
               top: 10,
-              left: 20,
+              left: 17,
               right: 11,
             }}
           >
