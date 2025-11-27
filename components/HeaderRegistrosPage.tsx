@@ -47,7 +47,11 @@ export function HeaderRegistrosPage({}) {
       <LevelBomb data={data} isLoading={isLoading} />
       <div className="size-full flex flex-col justify-center items-center border border-black/10 rounded-2xl aspect-square">
         <span className="font-thin text-xs">Tierra</span>
-        <RiFlaskFill className="size-8 text-amber-800" />
+        <RiFlaskFill
+          className={`size-8 ${
+            data.pH > 8 || data.pH < 6 ? "text-red-700" : "text-amber-800"
+          }`}
+        />
         <span
           className={`text-base font-medium ${
             isLoading ? "opacity-70" : "opacity-100"
