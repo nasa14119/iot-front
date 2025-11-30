@@ -1,16 +1,14 @@
 "use client";
 import { useRegistres } from "../../../components/RegistresProvider";
-import { RegistrosHeader } from "../../../components/RegistrosHeader";
 import { ChartDay } from "@components/ChartDay";
 import { HeaderRegistrosPage } from "@components/HeaderRegistrosPage";
 export default function RegistresMain() {
   const registres = useRegistres();
   if (!registres) return null;
   return (
-    <main className="min-h-dvh bg-white/90 h-fit">
-      <RegistrosHeader title="registros" />
+    <section className="min-h-dvh bg-white/90 h-fit">
       <HeaderRegistrosPage />
-      <section className="flex gap-x-2 flex-wrap flex-col px-2 pb-20">
+      <section className="flex gap-x-2 flex-wrap flex-col px-2 pb-20 gap-y-5 mt-2">
         <ChartDay
           registres={registres}
           topic="humidity"
@@ -30,8 +28,9 @@ export default function RegistresMain() {
           topic="soil"
           title="Humedad de las Plantas"
           color="var(--color-green-600)"
+          href="registros/tierra"
         />
       </section>
-    </main>
+    </section>
   );
 }

@@ -1,7 +1,7 @@
 import { RiCloudOffFill, RiDatabase2Fill } from "@remixicon/react";
 import { getEspLastRegistresClient } from "@utils";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useEffectEvent } from "react";
 
 const ENV_REFRESH = process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE
@@ -10,8 +10,6 @@ const ENV_REFRESH = process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE
 const COOLDOWN = ENV_REFRESH * 1000;
 type Props = { status: number; error?: string };
 export function ErrorRegisters({ status, error }: Props) {
-  const pathname = usePathname();
-  const title = pathname.split("/").at(-1);
   const { refresh } = useRouter();
   const refetch = useEffectEvent(async () => {
     let sucess = false;
@@ -27,10 +25,7 @@ export function ErrorRegisters({ status, error }: Props) {
     refetch();
   }, []);
   return (
-    <main className="w-dvw h-dvh flex justify-center items-center mx-auto max-w-[500px] flex-col pb-[10dvh] pt-1 px-[10vw] md:px-2">
-      <h1 className="font-bold text-3xl capitalize text-center py-5">
-        {title}
-      </h1>
+    <main className="w-dvw h-full flex justify-center items-center mx-auto max-w-[500px] flex-col pb-[10dvh] pt-1 px-[10vw] md:px-2 [grid-area:main]">
       <div className="rounded-4xl size-full flex justify-center items-center bg-neutral-300/20 flex-col">
         {status === 204 ? (
           <RiDatabase2Fill className="size-30 text-black/90" />
