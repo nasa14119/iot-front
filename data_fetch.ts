@@ -23,7 +23,9 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     const res = await fetch(`${process.env.THINGSKEAK_URL}`);
     if (!res.ok) throw null;
     const data = await res.json();
-    const new_link = `https://${data.feeds[0].field1}`;
+    const new_link = `https://${
+      data.feeds[0][process.env.FIELD_THINGSPEAK ?? "field1"]
+    }`;
     url = new_link;
   } catch {
     return ["ThingSpeack Error", null];
