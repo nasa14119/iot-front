@@ -10,8 +10,8 @@ type Props = PropsWithChildren & {
 };
 export function RegistersProvider({ registres, children, status }: Props) {
   const [data, , error] = useDayRegistres(registres ?? undefined);
-  if (!registres) return <ErrorRegisters status={status} />;
-  if (error) return <ErrorRegisters {...error} />;
+  if (!registres && status === 204) return <ErrorRegisters status={status} />;
+  if (error || !registres) return <ErrorRegisters {...error} />;
   return <Context.Provider value={data}>{children}</Context.Provider>;
 }
 export const useRegistres = () => {
