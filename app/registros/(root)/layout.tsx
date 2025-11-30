@@ -11,8 +11,8 @@ export default async function layout({ children }: Props) {
   return (
     <main className="min-h-dvh regiters-layout">
       <RegistrosHeader />
-      <NavRegisters />
       <RegistersProvider registres={data} status={status}>
+        <NavRegisters />
         {children}
       </RegistersProvider>
     </main>
