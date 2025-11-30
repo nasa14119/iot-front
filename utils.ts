@@ -17,12 +17,14 @@ export const getEspLastRegistreClient = async (): RequestResponseClient => {
   }
 };
 export const getEspLastRegistresClient = async (): Promise<Registres> => {
+  let res;
   try {
-    const res = await fetch(`api/registres`);
-    if (!res.ok || !("json" in res)) throw error(res.status);
-    const esp = await res.json();
-    return esp.data;
+    res = await fetch(`api/registres`);
   } catch {
     throw error(500);
   }
+  if (res.status === 204) throw error(res.status);
+  if (!res.ok) throw error(res.status);
+  const esp = await res.json();
+  return esp.data;
 };

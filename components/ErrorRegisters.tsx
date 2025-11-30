@@ -1,11 +1,31 @@
 import { RiCloudOffFill, RiDatabase2Fill } from "@remixicon/react";
+import { getEspLastRegistresClient } from "@utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useEffectEvent } from "react";
 
+const ENV_REFRESH = process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE
+  ? Number(process.env.NEXT_PUBLIC_SECONDS_SWR_REGISTRE)
+  : 10;
+const COOLDOWN = ENV_REFRESH * 1000;
 type Props = { status: number; error?: string };
 export function ErrorRegisters({ status, error }: Props) {
   const pathname = usePathname();
   const title = pathname.split("/").at(-1);
+  const { refresh } = useRouter();
+  const refetch = useEffectEvent(async () => {
+    let sucess = false;
+    do {
+      await new Promise((res) => setTimeout(res, COOLDOWN));
+      await getEspLastRegistresClient()
+        .then(() => (sucess = true))
+        .catch(() => {});
+    } while (!sucess);
+    refresh();
+  });
+  useEffect(() => {
+    refetch();
+  }, []);
   return (
     <main className="w-dvw h-dvh flex justify-center items-center mx-auto max-w-[500px] flex-col pb-[10dvh] pt-1 px-[10vw] md:px-2">
       <h1 className="font-bold text-3xl capitalize text-center py-5">

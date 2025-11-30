@@ -1,12 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useRegistres } from "../../../components/RegistresProvider";
 import { RegistrosHeader } from "../../../components/RegistrosHeader";
 import { ChartDay } from "@components/ChartDay";
 import { HeaderRegistrosPage } from "@components/HeaderRegistrosPage";
 export default function RegistresMain() {
   const registres = useRegistres();
-  const router = useRouter();
   if (!registres) return null;
   return (
     <main className="min-h-dvh bg-white/90 h-fit">
@@ -18,13 +16,14 @@ export default function RegistresMain() {
           topic="humidity"
           title="Humedad del Ambiente"
           color="var(--color-blue-950)"
-          onClick={() => router.push("registros/humedad")}
+          href="registros/humedad"
         />
         <ChartDay
           registres={registres}
           topic="temperature"
           title="Temperatura del Ambiente"
           color="var(--color-red-600)"
+          href="registros/temperatura"
         />
         <ChartDay
           registres={registres}

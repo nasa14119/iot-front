@@ -18,6 +18,7 @@ import {
 import { format } from "@formkit/tempo";
 import { CSSProperties, HTMLAttributes } from "react";
 import { RiArrowRightSLine } from "@remixicon/react";
+import Link from "next/link";
 
 export const description = "A line chart";
 
@@ -32,8 +33,16 @@ type Props = {
   topic: keyof Registre;
   title: string;
   color?: string;
+  href?: string;
 } & HTMLAttributes<HTMLDivElement>;
-export function ChartDay({ registres, topic, title, color, ...rest }: Props) {
+export function ChartDay({
+  registres,
+  topic,
+  title,
+  color,
+  href,
+  ...rest
+}: Props) {
   const chartColor = color ?? "var(--color-neutral-400)";
   return (
     <Card className="my-2 shadow-none border border-black/10 gap-0" {...rest}>
@@ -42,10 +51,14 @@ export function ChartDay({ registres, topic, title, color, ...rest }: Props) {
         <CardDescription className="first-letter:uppercase">
           {format(registres[0].date, "full", "es")}
         </CardDescription>
-        <RiArrowRightSLine
-          className={`absolute right-5 size-8 text-(--arrow-color) pointer-events-none`}
-          style={{ "--arrow-color": chartColor } as CSSProperties}
-        />
+        {href && (
+          <Link href={href} className={`absolute right-5 size-8`}>
+            <RiArrowRightSLine
+              className=" text-(--arrow-color) "
+              style={{ "--arrow-color": chartColor } as CSSProperties}
+            />
+          </Link>
+        )}
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
