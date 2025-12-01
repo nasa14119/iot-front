@@ -3,15 +3,15 @@ import { tw } from "@utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 const keys = [
-  { href: "registros/humedad", title: "humedad" },
-  { href: "registros/temperatura", title: "temperatura" },
-  { href: "registros/tierra", title: "tierra" },
+  { href: "/registros/humedad", title: "humedad" },
+  { href: "/registros/temperatura", title: "temperatura" },
+  { href: "/registros/tierra", title: "tierra" },
 ];
 export function NavMonth({}) {
   const pathname = usePathname();
   return (
-    <nav className="px-2 sticky top-2 font-semibold flex justify-start items-center gap-2 z-50">
-      <Link href="registros">
+    <nav className="px-2 sticky top-2 font-semibold flex justify-start items-center gap-2 z-50 [grid-area:nav]">
+      <Link href="/registros">
         <Arrow className="size-7 rounded-full  text-black bg-neutral-200 p-1" />
       </Link>
       {keys.map((link) => (

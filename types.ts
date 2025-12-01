@@ -18,3 +18,11 @@ export interface CarrusselElement {
   img: string;
   loader?: string;
 }
+export type HistoryRegistre = {
+  date: string;
+  humidity: number;
+  stamp: string;
+  temperature: number;
+  soil: number;
+  pH: number;
+};

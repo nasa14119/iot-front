@@ -1,5 +1,5 @@
 "use server";
-import { Registres } from "@types";
+import { HistoryRegistre, Registres } from "@types";
 import { error, RequestResponse } from "@utils";
 const AbortTime = 10 * 1000;
 type CheckError = [err: null, data: string] | [err: string, data: null];
@@ -87,4 +87,65 @@ export const getEspRegistresDay = async (): Promise<
   if (res.status === 204) return [204, null];
   const registres = await res.json();
   return [200, registres];
+};
+export const getEspRegistresWeek = async (
+  url: string,
+  querry: URLSearchParams
+): Promise<[number, Registres | null]> => {
+  let res;
+  try {
+    res = await fetch(`${url}/registres/week?${querry.toString()}`, {
+      signal: AbortSignal.timeout(AbortTime),
+    }).catch(() => {
+      throw "FETCH";
+    });
+    if (!res.ok) return [res.status, null];
+  } catch (e) {
+    if (e === "FETCH") return [521, null];
+    return [500, null];
+  }
+  if (res.status === 204) return [204, null];
+  const registres = await res.json();
+  return [200, registres];
+};
+export const getEspRegistresMonth = async (
+  url: string,
+  querry: URLSearchParams
+): Promise<[number, Registres | null]> => {
+  let res;
+  try {
+    res = await fetch(`${url}/registres/month?${querry.toString()}`, {
+      signal: AbortSignal.timeout(AbortTime),
+    }).catch(() => {
+      throw "FETCH";
+    });
+    if (!res.ok) return [res.status, null];
+  } catch (e) {
+    if (e === "FETCH") return [521, null];
+    return [500, null];
+  }
+  if (res.status === 204) return [204, null];
+  const registres = await res.json();
+  return [200, registres];
+};
+export const getHistory = async (): Promise<
+  [number, null | HistoryRegistre[]]
+> => {
+  const [err, url] = await check_link();
+  if (err !== null) {
+    return [521, null];
+  }
+  let res;
+  try {
+    res = await fetch(`${url}/registres`).catch(() => {
+      throw "FETCH";
+    });
+    if (res.status === 204) return [204, null];
+    if (!res.ok || !("json" in res)) return [res.status, null];
+  } catch (err) {
+    if (err === "FETCH") return [503, null];
+    return [500, null];
+  }
+  const data = await res.json();
+  return [200, data];
 };
