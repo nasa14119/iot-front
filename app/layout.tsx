@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${interFont.variable} antialiased max-w-[500px] mx-auto`}
+        className={`${interFont.variable} antialiased max-w-[500px] mx-auto pb-20 relative`}
       >
         {children}
         <Nav />
