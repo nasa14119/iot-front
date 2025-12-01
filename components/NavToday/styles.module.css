@@ -1,0 +1,8 @@
+.nav-item[data-state="true"] {
+  background-color: black;
+  color: white;
+}
+.nav-item[data-state="false"] {
+  background-color: #e3e3e3;
+  color: black;
+}

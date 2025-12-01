@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import type { ClassValue } from "clsx";
 import clsx from "clsx";
-import { Registre, FetchError, Registres } from "@types";
+import { Registre, FetchError, Registres, HistoryRegistre } from "@types";
 export type RequestResponse = Promise<Registre | FetchError>;
 export type RequestResponseClient = Promise<Registre>;
 export const tw = (...styles: ClassValue[]) => twMerge(clsx(styles));
@@ -28,3 +28,20 @@ export const getEspLastRegistresClient = async (): Promise<Registres> => {
   const esp = await res.json();
   return esp.data;
 };
+export const getEspHistory = async (
+  url: string
+): Promise<HistoryRegistre[] | null> => {
+  let res;
+  try {
+    res = await fetch(url);
+  } catch {
+    throw error(500);
+  }
+  if (res.status === 204) throw error(res.status);
+  if (!res.ok) throw error(res.status);
+  const esp = await res.json();
+  return esp.data;
+};
+
+export const round_two = (num: number) =>
+  Math.round((num + Number.EPSILON) * 100) / 100;

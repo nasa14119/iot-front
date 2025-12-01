@@ -1,8 +1,11 @@
-type Props = { title: string };
+"use client";
+import { usePathname } from "next/navigation";
 
-export function RegistrosHeader({ title }: Props) {
+export function RegistrosHeader({}) {
+  const pathname = usePathname();
+  const title = pathname.split("/").at(-1);
   return (
-    <header className="px-2 text-center py-5 capitalize bg-white border-b border-b-neutral-700/10">
+    <header className="px-2 text-center py-5 capitalize bg-white [grid-area:header]">
       <h1 className="text-center text-3xl font-bold">{title}</h1>
     </header>
   );

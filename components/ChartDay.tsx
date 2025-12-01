@@ -19,6 +19,7 @@ import { format } from "@formkit/tempo";
 import { CSSProperties, HTMLAttributes } from "react";
 import { RiArrowRightSLine } from "@remixicon/react";
 import Link from "next/link";
+import { useIndicator } from "@components/NavToday/store";
 
 export const description = "A line chart";
 
@@ -44,8 +45,14 @@ export function ChartDay({
   ...rest
 }: Props) {
   const chartColor = color ?? "var(--color-neutral-400)";
+  const ref = useIndicator(href ?? "#");
   return (
-    <Card className="my-2 shadow-none border border-black/10 gap-0" {...rest}>
+    <Card
+      className="shadow-none border border-black/10 gap-0"
+      id={href && href.split("/").at(-1)}
+      ref={ref}
+      {...rest}
+    >
       <CardHeader className="pb-1 relative">
         <CardTitle>{title}</CardTitle>
         <CardDescription className="first-letter:uppercase">
