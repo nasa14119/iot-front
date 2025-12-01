@@ -4,6 +4,7 @@ import { FancyLink } from "../components/FancyLink";
 import { getEspLastRegistre } from "@fetch";
 import { ErrorSummary } from "../components/ErrorSummary";
 import { Carrusel } from "../components/Carrusel";
+import { Banner } from "../components/notificaciones/Banner";
 async function DataItem() {
   const data = await getEspLastRegistre();
 
@@ -21,6 +22,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">Resumen</h1>
       </header>
       <DataItem />
+      <Banner />
       <FancyLink href="/registros" className="text-xl font-semibold my-2">
         Registros
       </FancyLink>
