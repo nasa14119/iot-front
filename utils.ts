@@ -40,7 +40,6 @@ export const getEspHistory = async (
   if (res.status === 204) throw error(res.status);
   if (!res.ok) throw error(res.status);
   const esp = await res.json();
-  console.log(esp.data);
   return esp.data;
 };
 

@@ -26,11 +26,12 @@ export function ChartWeek({ color, ...rest }: Props) {
     getEspHistory
   );
 
+  const title = "Semanal";
   if (isLoading)
     return (
       <div className="w-full aspect-video flex flex-col py-5 rounded-xl bg-card border shadow-sm">
         <div className="relative px-6 ">
-          <h2 className="font-semibold">Semana</h2>
+          <h2 className="font-semibold">{title}</h2>
           <span className="text-muted-foreground text-sm">
             {format(addDay(date, -6), "DD/MM/YY", "es")} al{" "}
             {format(date, "DD/MM/YY", "es")}
@@ -63,7 +64,7 @@ export function ChartWeek({ color, ...rest }: Props) {
     return (
       <div className="w-full aspect-video flex flex-col py-5 rounded-xl bg-card border shadow-sm">
         <div className="relative px-6 ">
-          <h2 className="font-semibold">Semana</h2>
+          <h2 className="font-semibold">{title}</h2>
           <span className="text-muted-foreground text-sm">
             {format(addDay(date, -6), "DD/MM/YY", "es")} al{" "}
             {format(date, "DD/MM/YY", "es")}
@@ -92,7 +93,7 @@ export function ChartWeek({ color, ...rest }: Props) {
       data={data}
       color={color}
       {...rest}
-      title="Semana"
+      title={title}
       next={next}
       prev={prev}
     />

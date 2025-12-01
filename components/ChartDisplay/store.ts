@@ -9,6 +9,7 @@ type Store = {
   nextWeek: () => void;
   nextMonth: () => void;
   prevMonth: () => void;
+  reset: () => void;
 };
 const formatDate = (d: Date) => format(d, "DD/MM/YY", "es");
 const useStoreDate = create(
@@ -51,6 +52,13 @@ const useStoreDate = create(
           };
         });
       },
+      reset: () => {
+        const now = new Date();
+        set({
+          date: now,
+          format: formatDate(now),
+        });
+      },
     }),
     {
       name: "date-store",
@@ -85,4 +93,8 @@ export const useControlsMonth = () => {
   const next = useStoreDate((s) => s.nextMonth);
   const prev = useStoreDate((s) => s.prevMonth);
   return { next, prev };
+};
+export const useResetDate = () => {
+  const reset = useStoreDate((s) => s.reset);
+  return reset;
 };

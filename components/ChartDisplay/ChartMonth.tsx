@@ -25,12 +25,12 @@ export function ChartMonth({ color, ...rest }: Props) {
     `/api/registres/month?${params.toString()}`,
     getEspHistory
   );
-
+  const title = "Mensual";
   if (isLoading)
     return (
       <div className="w-full aspect-video flex flex-col py-5 rounded-xl bg-card border shadow-sm">
         <div className="relative px-6 ">
-          <h2 className="font-semibold">Mes</h2>
+          <h2 className="font-semibold">{title}</h2>
           <span className="text-muted-foreground text-sm">
             {format(date, "DD/MM/YY", "es")}
           </span>
@@ -62,7 +62,7 @@ export function ChartMonth({ color, ...rest }: Props) {
     return (
       <div className="w-full aspect-video flex flex-col py-5 rounded-xl bg-card border shadow-sm">
         <div className="relative px-6 ">
-          <h2 className="font-semibold">Mes</h2>
+          <h2 className="font-semibold">{title}</h2>
           <span className="text-muted-foreground text-sm">
             {format(date, "DD/MM/YY", "es")} al {end}
           </span>
@@ -90,7 +90,7 @@ export function ChartMonth({ color, ...rest }: Props) {
       data={data}
       color={color}
       {...rest}
-      title="Mes"
+      title={title}
       next={next}
       prev={prev}
     />
