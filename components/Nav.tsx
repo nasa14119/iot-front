@@ -15,6 +15,7 @@ export function Nav({}) {
           icon={<RiBookOpenFill className="size-8 pointer-events-none" />}
         />
         <NavIcon
+          reload
           link="/notificaciones"
           icon={<RiNotification3Fill className="size-8 pointer-events-none" />}
         />

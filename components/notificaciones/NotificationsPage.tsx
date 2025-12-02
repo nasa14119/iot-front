@@ -11,8 +11,9 @@ type Props = { status: number; notifications: Notification[] | null };
 
 export function NotificationsPage({ status, notifications }: Props) {
   const last_val = useNotifications();
-  const inicial_state = notifications === null ? null : notifications;
-  const [state, setState] = useState(inicial_state);
+  const [state, setState] = useState(() =>
+    notifications === null ? null : notifications.slice(1)
+  );
   const update = useEffectEvent((new_val: typeof last_val) => {
     if (!new_val) return;
     setState(() => {
