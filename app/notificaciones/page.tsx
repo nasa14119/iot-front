@@ -33,3 +33,4 @@ export default async function Notifications() {
     </main>
   );
 }
+export const revalidate = 0;
