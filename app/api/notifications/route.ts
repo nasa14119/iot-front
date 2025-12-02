@@ -22,3 +22,15 @@ export async function GET() {
     url: parsing.toString(),
   });
 }
+export async function DELETE() {
+  const cookieJar = await cookies();
+  let url_cookie = "";
+  if (cookieJar.has("url")) {
+    url_cookie = cookieJar.get("url")?.value ?? "";
+  }
+  const [err, url] = await check_link(url_cookie);
+  if (err !== null)
+    return NextResponse.json({ error: err, url: null }, { status: 400 });
+  await fetch(`${url}/notifications`, { method: "DELETE" });
+  return NextResponse.json(null, { status: 204 });
+}

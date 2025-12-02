@@ -45,7 +45,7 @@ export function NotificationElement({ data }: Props) {
     >
       <p className="max-w-[45ch] text-sm font-semibold leading-4">
         <span className="font-medium text-xs">
-          {format(data.stamp, "h:mm:ss a")}
+          {format(data.stamp, "h:mm:ss a", "en")}
         </span>
         <br />
         {payload.message}
