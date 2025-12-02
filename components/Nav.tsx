@@ -1,4 +1,8 @@
-import { RiBookOpenFill, RiHomeFill } from "@remixicon/react";
+import {
+  RiBookOpenFill,
+  RiHomeFill,
+  RiNotification3Fill,
+} from "@remixicon/react";
 import { NavIcon } from "./NavIcon";
 
 export function Nav({}) {
@@ -9,6 +13,10 @@ export function Nav({}) {
         <NavIcon
           link="/registros"
           icon={<RiBookOpenFill className="size-8 pointer-events-none" />}
+        />
+        <NavIcon
+          link="/notificaciones"
+          icon={<RiNotification3Fill className="size-8 pointer-events-none" />}
         />
       </div>
     </nav>

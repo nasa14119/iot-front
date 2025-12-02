@@ -4,6 +4,9 @@ import { FancyLink } from "../components/FancyLink";
 import { getEspLastRegistre } from "@fetch";
 import { ErrorSummary } from "../components/ErrorSummary";
 import { Carrusel } from "../components/Carrusel";
+import { BannerServer } from "@components/notificaciones/BannerServer";
+import { Suspense } from "react";
+import { LoadingBanner } from "@components/notificaciones/LoadingBanner";
 async function DataItem() {
   const data = await getEspLastRegistre();
 
@@ -21,6 +24,9 @@ export default function Home() {
         <h1 className="text-4xl font-bold">Resumen</h1>
       </header>
       <DataItem />
+      <Suspense fallback={<LoadingBanner />}>
+        <BannerServer />
+      </Suspense>
       <FancyLink href="/registros" className="text-xl font-semibold my-2">
         Registros
       </FancyLink>

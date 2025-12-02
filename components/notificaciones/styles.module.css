@@ -1,0 +1,19 @@
+@keyframes new-noti {
+  from {
+    transform: scale(0.8) translateY(10px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+.main-notification-animation {
+  opacity: 0;
+  animation: new-noti ease-out 250ms forwards;
+  transform-origin: center;
+  animation-delay: 150ms;
+}
