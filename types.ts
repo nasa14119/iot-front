@@ -26,3 +26,13 @@ export type HistoryRegistre = {
   soil: number;
   pH: number;
 };
+type NotificationData = {
+  prioridad: "none" | "warning" | "error";
+  source: "PUMP" | "MOTOR";
+  message: string;
+};
+export type Notification = {
+  id: string;
+  stamp: Date;
+  data: NotificationData;
+};
