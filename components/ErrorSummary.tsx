@@ -23,10 +23,10 @@ type Props = FetchError & { isLoading?: boolean };
 export function ErrorSummary({ isLoading = false, ...error }: Props) {
   const { refresh } = useRouter();
   const refetch = useEffectEvent(async () => {
-    let data = await getEspLastRegistreClient();
+    let data = await getEspLastRegistreClient().catch((e) => e);
     do {
       await new Promise((res) => setTimeout(res, COOLDOWN));
-      data = await getEspLastRegistreClient();
+      data = await getEspLastRegistreClient().catch((e) => e);
     } while ("status" in data);
     refresh();
   });

@@ -8,13 +8,21 @@ export const check_link = async (url?: string): Promise<CheckError> => {
     if (!process.env.GATEWAY_PATH) {
       throw new Error("Set up the development link");
     }
-    return [null, process.env.GATEWAY_PATH];
+    const isOk = await fetch(`${process.env.GATEWAY_PATH}/helth`)
+      .then(() => true)
+      .catch(() => false);
+    if (isOk) return [null, process.env.GATEWAY_PATH];
+    return ["Server offline", null];
   }
   if (url) {
     try {
-      const isOk = (await fetch(`${url}/helth`)).ok;
+      const isOk = (
+        await fetch(`${url}/helth`).catch(() => {
+          throw null;
+        })
+      ).ok;
       if (isOk) return [null, url];
-    } catch (e) {
+    } catch {
       url = "";
     }
   }
