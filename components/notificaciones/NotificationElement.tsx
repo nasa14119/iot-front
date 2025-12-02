@@ -5,6 +5,7 @@ import { Notification } from "@types";
 import styles from "./styles.module.css";
 import { tw } from "@utils";
 import { CSSProperties } from "react";
+import { useIsChangingFlag } from "@components/notificaciones/store";
 type Props = {
   data: Notification;
 };
@@ -23,9 +24,9 @@ const Icon = ({ type, className: propClass, ...rest }: IconProps) => {
 export function NotificationElement({ data }: Props) {
   const payload = data.data;
   const isFirst = useIsFirstLoad();
+  const isChanging = useIsChangingFlag();
   return (
     <section
-      key={data.id}
       className={tw(
         "rounded-4xl px-6 py-2 sm:py-1 aspect-16/2 flex opacity-100 items-center m-2 max-h-20",
         {
@@ -37,7 +38,7 @@ export function NotificationElement({ data }: Props) {
         {
           "bg-neutral-200": payload.prioridad === "none",
         },
-        { [styles["main-notification-animation"]]: !isFirst },
+        { [styles["main-notification-animation"]]: !isFirst && isChanging },
         { "fade-in": isFirst }
       )}
       style={{ "--duration-fade": "50ms" } as CSSProperties}

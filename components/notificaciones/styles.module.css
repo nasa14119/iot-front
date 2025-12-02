@@ -13,7 +13,7 @@
 }
 .main-notification-animation {
   opacity: 0;
-  animation: new-noti ease 750ms forwards;
+  animation: new-noti ease-out 250ms forwards;
   transform-origin: center;
   animation-delay: 150ms;
 }
