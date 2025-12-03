@@ -17,7 +17,7 @@ export async function GET() {
       throw { code: "SERVER_DOWN", error: err };
     }
     url = new_link;
-    const req = await fetch(`${url}/water/trigger`);
+    const req = await fetch(`${url}/water/check`);
     const res = NextResponse.json(await req.json(), { status: req.status });
     res.cookies.set("url", url, {
       httpOnly: true,

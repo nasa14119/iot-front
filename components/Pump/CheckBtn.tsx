@@ -1,6 +1,6 @@
 "use client";
 import { useValueWaterSetter, useWaterData } from "@components/Pump/store";
-import { RiSeedlingFill } from "@remixicon/react";
+import { RiCheckFill, RiSeedlingFill } from "@remixicon/react";
 import "ldrs/react/Ring.css";
 import { Ring } from "ldrs/react";
 import { useState } from "react";
@@ -12,14 +12,14 @@ function Loader() {
     </span>
   );
 }
-export function WaterBtn() {
+export function CheckBtn() {
   const data = useWaterData();
   const setter = useValueWaterSetter();
   const [isLoading, setLoading] = useState(false);
-  const disable = (!data?.can_water || isLoading) && data?.success !== "check";
+  const disable = isLoading;
   const handleClick = async () => {
     setLoading(true);
-    await fetch("/api/pump/trigger").catch(console.error);
+    await fetch("/api/pump/check").catch(console.error);
     const res = await fetch("/api/pump").catch(() => {
       setter(null);
       return;
@@ -36,17 +36,17 @@ export function WaterBtn() {
     setLoading(false);
   };
   if (!data) return null;
-  return (
-    <button
-      disabled={disable}
-      onClick={handleClick}
-      className={tw(
-        "rounded-4xl w-fit py-1 bg-blue-500 text-white flex gap-x-2 px-4 items-center justify-between ",
-        { "bg-blue-500/50": disable }
-      )}
-    >
-      <span>Regar</span>
-      {isLoading ? <Loader /> : <RiSeedlingFill className="size-5" />}
-    </button>
-  );
+  if (!data.can_water && data.success === "error")
+    return (
+      <button
+        disabled={disable}
+        onClick={handleClick}
+        className={tw(
+          "rounded-full w-fit p-1 bg-green-600 text-white flex gap-x-2 items-center justify-between ",
+          { "opacity-20": disable }
+        )}
+      >
+        {isLoading ? <Loader /> : <RiCheckFill className="size-5" />}
+      </button>
+    );
 }

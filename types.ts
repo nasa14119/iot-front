@@ -28,7 +28,7 @@ export type HistoryRegistre = {
 };
 export type PumpRegistre = {
   stamp: string;
-  success: boolean;
+  success: "success" | "error" | "check";
   new_level: number;
   soil: number;
   can_water: boolean;

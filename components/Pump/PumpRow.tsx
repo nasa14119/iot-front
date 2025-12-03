@@ -12,11 +12,18 @@ import {
 type Props = { data: PumpRegistre };
 const Success = ({ success }: { success: PumpRegistre["success"] }) => {
   const className =
-    "font-medium rounded-4xl text-sm w-10 my-1 text-center mx-auto text-white";
+    "font-medium rounded-4xl text-sm w-12 my-1 text-center mx-auto text-white";
   return (
     <TableCell>
-      {success && <div className={`${className} bg-green-500`}>bien</div>}
-      {!success && <div className={`${className} bg-red-400`}>error</div>}
+      {success === "success" && (
+        <div className={`${className} bg-green-500`}>bien</div>
+      )}
+      {success === "error" && (
+        <div className={`${className} bg-red-400`}>error</div>
+      )}
+      {success === "check" && (
+        <div className={`${className} bg-blue-400 `}>check</div>
+      )}
     </TableCell>
   );
 };
