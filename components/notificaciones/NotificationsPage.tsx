@@ -33,7 +33,9 @@ export function NotificationsPage({ status, notifications }: Props) {
   if (status === 204 && state === null) return null;
   if (status !== 200 && status !== 204) return <ErrorServer />;
   const sliced_state =
-    !state || state === null || state.length <= 1 ? null : state.slice(1);
+    !state || state === null || state.length <= 1
+      ? null
+      : state.slice(1).filter((v) => v.id !== last_val?.id);
   return (
     <>
       <button
