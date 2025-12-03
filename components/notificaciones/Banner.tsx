@@ -15,7 +15,7 @@ export function Banner({ url }: Props) {
   }
   if (data === null) {
     return (
-      <section className="rounded-4xl  px-5 py-2 m-4 aspect-16/2  bg-neutral-100 flex flex-col">
+      <section className=" py-2 my-4 flex flex-col aspect-16/2">
         <EmptyNotification />
       </section>
     );

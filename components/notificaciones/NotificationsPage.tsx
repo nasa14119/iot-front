@@ -32,8 +32,8 @@ export function NotificationsPage({ status, notifications }: Props) {
   };
   if (status === 204 && state === null) return null;
   if (status !== 200 && status !== 204) return <ErrorServer />;
-  if (!state || state === null || state.length <= 1) return null;
-  const sliced_state = state.slice(1);
+  const sliced_state =
+    !state || state === null || state.length <= 1 ? null : state.slice(1);
   return (
     <>
       <button
@@ -42,10 +42,14 @@ export function NotificationsPage({ status, notifications }: Props) {
       >
         <RiDeleteBin7Fill className="text-red-700 rounded-full p-2 size-10 bg-red-700/10" />
       </button>
-      <h2 className="pl-2 text-xl font-semibold">Historial</h2>
-      {sliced_state.map((noti) => {
-        return <NotificationElement data={noti} key={noti.id} />;
-      })}
+      {sliced_state !== null && (
+        <>
+          <h2 className="pl-2 text-xl font-semibold">Historial</h2>
+          {sliced_state.map((noti) => {
+            return <NotificationElement data={noti} key={noti.id} />;
+          })}
+        </>
+      )}
     </>
   );
 }
