@@ -6,6 +6,7 @@ import {
   RiTempColdLine,
 } from "@remixicon/react";
 import { Registre } from "@types";
+import { round_two } from "@utils";
 import { ReactNode } from "react";
 
 type IconKey = keyof Omit<Registre, "date">;
@@ -21,7 +22,8 @@ export const ICONS_SUMMARY: Record<IconKey, ReactNode> = {
   soil: <RiFlowerLine />,
   temperature: <RiTempColdLine />,
 };
-const parse_number = (key: IconKey, value: number) => {
+const parse_number = (key: IconKey, param: number) => {
+  const value = round_two(param);
   switch (key) {
     case "temperature":
       return `${value} °`;

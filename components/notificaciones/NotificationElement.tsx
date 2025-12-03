@@ -14,7 +14,7 @@ type IconProps = {
   className?: string;
 };
 const Icon = ({ type, className: propClass, ...rest }: IconProps) => {
-  const className = tw("size-8", propClass);
+  const className = tw("size-7", propClass);
   if (type === "PUMP")
     return <RiDropFill className={tw(className, "text-blue-500")} {...rest} />;
   return (
@@ -28,7 +28,7 @@ export function NotificationElement({ data }: Props) {
   return (
     <section
       className={tw(
-        "rounded-4xl px-6 py-2 sm:py-1 aspect-16/2 flex opacity-100 items-center m-2 max-h-20",
+        "rounded-4xl px-6 py-2 sm:py-1 aspect-16/2 flex opacity-100 items-center justify-between m-2 max-h-20",
         {
           "bg-red-500/50 text-white": payload.prioridad === "error",
         },
@@ -50,7 +50,9 @@ export function NotificationElement({ data }: Props) {
         <br />
         {payload.message}
       </p>
-      <Icon type={payload.source} className={"ml-auto"} />
+      <span className="w-1/5">
+        <Icon type={payload.source} className={"ml-auto"} />
+      </span>
     </section>
   );
 }
