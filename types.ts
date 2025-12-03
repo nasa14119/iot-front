@@ -26,6 +26,13 @@ export type HistoryRegistre = {
   soil: number;
   pH: number;
 };
+export type PumpRegistre = {
+  stamp: string;
+  success: boolean;
+  new_level: number;
+  soil: number;
+  can_water: boolean;
+};
 type NotificationData = {
   prioridad: "none" | "warning" | "error";
   source: "PUMP" | "MOTOR";

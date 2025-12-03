@@ -156,3 +156,33 @@ export const getHistory = async (): Promise<
   const data = await res.json();
   return [200, data];
 };
+export const getLastPump = async (url: string) => {
+  let res;
+  try {
+    res = await fetch(`${url}/water/get-status`).catch(() => {
+      throw "FETCH";
+    });
+    if (res.status === 204) return [204, null];
+    if (!res.ok || !("json" in res)) return [res.status, null];
+  } catch (err) {
+    if (err === "FETCH") return [503, null];
+    return [500, null];
+  }
+  const data = await res.json();
+  return [200, data];
+};
+export const getPumpValues = async (url: string) => {
+  let res;
+  try {
+    res = await fetch(`${url}/water`).catch(() => {
+      throw "FETCH";
+    });
+    if (res.status === 204) return [204, null];
+    if (!res.ok || !("json" in res)) return [res.status, null];
+  } catch (err) {
+    if (err === "FETCH") return [503, null];
+    return [500, null];
+  }
+  const data = await res.json();
+  return [200, data];
+};
